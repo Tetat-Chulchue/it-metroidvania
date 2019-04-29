@@ -11,7 +11,8 @@ int main() {
     // Initialization
     //--------------------------------------------------------------------------------------
     int screenWidth = 1600;
-    int screenHeight = 900;
+    int screenHeight = 900
+    ;
     // 1 tile = 50 px ----> 32 tile * 18 tile
 
     InitWindow(screenWidth, screenHeight, "it-metroidvenia"); 
@@ -47,7 +48,7 @@ int main() {
     struct Rectangle LeftBorder   = {0, 0, 50, 900};           // |
     struct Rectangle RightBorder  = {1550, 0, 50, 900};        // | Declare border for colision detect
     struct Rectangle TopBorder    = {0, 0, 1600, 50};          // |
-    struct Rectangle BottomBorder = {0, 850, 1600, 50};        // |
+    struct Rectangle BottomBorder = {0, 700, 1600, 50};        // |
 
     struct Rectangle PlayerHitbox = {Player.x, Player.y, Player.width, Player.height};
     struct Rectangle TestNPCHitbox      = {TestNPC.x - 50, TestNPC.y - 50, 150, 150};
@@ -94,12 +95,15 @@ int main() {
             ClearBackground(RAYWHITE);
             for (int y = 0; y <= 850; y += 50) {
                 for (int x = 0; x <= 1550; x += 50) {
-                    if (x == 0 || x == 1550 || y == 0 || y == 850) {
+                    if (x == 0 || x == 1550 || y == 0 || y == 700) {
                         DrawRectangle(x, y, 50, 50, BLACK); 
                     }
                 }
             }
             
+       
+            DrawRectangle(75, 775, 1450, 100, BLACK); // Dialogue Box
+            DrawText("you feel like you're going to have a bad time (DIALOGUE BOX HERE)", 95, 810, 20, LIGHTGRAY);
                 
             DrawRectangle(Player.x, Player.y, Player.width, Player.height, PINK);
             DrawRectangle(TestNPC.x, TestNPC.y, TestNPC.width, TestNPC.height, MAGENTA);
