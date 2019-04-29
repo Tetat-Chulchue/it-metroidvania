@@ -42,13 +42,15 @@ int main() {
     
     struct Entity Player     = {1, 800, 450, 50, 50}; // Declare a "Player" Entity
 
+    struct Entity TestNPC   = {2, 450, 200, 50, 50};
+
     struct Rectangle LeftBorder   = {0, 0, 50, 900};           // |
     struct Rectangle RightBorder  = {1550, 0, 50, 900};        // | Declare border for colision detect
     struct Rectangle TopBorder    = {0, 0, 1600, 50};          // |
     struct Rectangle BottomBorder = {0, 850, 1600, 50};        // |
 
     struct Rectangle PlayerHitbox = {Player.x, Player.y, Player.width, Player.height};
-    
+    struct Rectangle TestNPCHitbox      = {TestNPC.x - 50, TestNPC.y - 50, 150, 150};
    
 
     // ---------- Main game loop ----------
@@ -57,13 +59,13 @@ int main() {
        
         // ---------- Controller ----------
 
-        if (IsKeyDown(KEY_W)) Player.y -= playerSpeed;
+        if (IsKeyDown(KEY_W)) Player.y -= playerSpeed; // Up
  
-        if (IsKeyDown(KEY_S)) Player.y += playerSpeed;
+        if (IsKeyDown(KEY_S)) Player.y += playerSpeed; // Down
 
-        if (IsKeyDown(KEY_A)) Player.x -= playerSpeed;
+        if (IsKeyDown(KEY_A)) Player.x -= playerSpeed; // Left
 
-        if (IsKeyDown(KEY_D)) Player.x += playerSpeed;
+        if (IsKeyDown(KEY_D)) Player.x += playerSpeed; // Right
         
         // ---------- Update Variable ----------
         
@@ -77,6 +79,10 @@ int main() {
         if (CheckCollisionRecs(PlayerHitbox, LeftBorder))   Player.x += playerSpeed; // Left
         if (CheckCollisionRecs(PlayerHitbox, RightBorder))  Player.x -= playerSpeed; // Right
         
+        if (CheckCollisionRecs(PlayerHitbox, TestNPCHitbox)) {
+            Player.x = 800;
+            Player.y = 450;
+        }
 
         
         // ---------- Draw ----------
@@ -93,8 +99,11 @@ int main() {
                     }
                 }
             }
+            
                 
             DrawRectangle(Player.x, Player.y, Player.width, Player.height, PINK);
+            DrawRectangle(TestNPC.x, TestNPC.y, TestNPC.width, TestNPC.height, MAGENTA);
+            DrawRectangleLines(TestNPCHitbox.x, TestNPCHitbox.y, TestNPCHitbox.width, TestNPCHitbox.height, BLUE);
 
         EndDrawing();
     }
