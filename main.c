@@ -101,9 +101,9 @@ int main() {
 
         BeginDrawing();
         
+            ClearBackground(RAYWHITE);
         // ---------- Border Of Map ----------
 
-            ClearBackground(RAYWHITE);
             for (int y = 0; y <= 850; y += 50) {
                 for (int x = 0; x <= 1550; x += 50) {
                     if (x == 0 || x == 1550 || y == 0 || y == 700) {
